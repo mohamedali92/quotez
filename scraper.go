@@ -17,9 +17,7 @@ var BaseUrl = "https://www.goodreads.com"
 
 func main() {
 	file, err := os.OpenFile("info.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
+	Check(err)
 	defer file.Close()
 	//log.SetOutput(file)
 
@@ -51,6 +49,10 @@ func main() {
 	log.Println("Starting Scraper")
 	c.Visit(BaseUrl + "/quotes/")
 
+	e := insertQuote(ctx, conn, quotes[0])
+	if e != nil {
+		log.Println(e)
+	}
 	log.Println(quotes, len(quotes))
 
 }

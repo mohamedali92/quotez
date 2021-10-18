@@ -43,6 +43,7 @@ func cleanAuthorField(author string) string {
 func extractTags(tagsString string) []string {
 	trimmed := strings.TrimPrefix(tagsString, "tags:\n")
 	trimmed = strings.ReplaceAll(trimmed, "       ", "")
+	trimmed = strings.ReplaceAll(trimmed, "\n", "")
 	tags := strings.Split(trimmed, ", ")
 	return tags
 
